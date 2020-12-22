@@ -45,6 +45,7 @@ public class MyBankServlet extends HttpServlet{
         {
             response.setContentType("application/json; charset=UTF-8");
             List<Transaction> transactions = Application.transactionService.findAll();
+            System.out.println(transactions);
             response.getWriter().print(Application.objectMapper.writeValueAsString(transactions));
         }
     }
