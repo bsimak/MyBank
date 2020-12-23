@@ -15,14 +15,17 @@ import java.util.List;
 public class MyBankServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        if (request.getRequestURI().equalsIgnoreCase("/transaction")) {
+        if (request.getRequestURI().equalsIgnoreCase("/transactions")) {
             Integer amount = Integer.valueOf(request.getParameter("amount"));
             String reference = request.getParameter("reference");
+            System.out.println("doPost before create");
 
             Transaction transaction = Application.transactionService.create(amount,reference);
+            System.out.println("doPost after create");
 
             response.setContentType("application/json; charset=UTF-8");
             String json = new ObjectMapper().writeValueAsString(transaction);
+            System.out.println(json);
             response.getWriter().print(json);
         }
         else {
@@ -45,8 +48,9 @@ public class MyBankServlet extends HttpServlet{
         {
             response.setContentType("application/json; charset=UTF-8");
             List<Transaction> transactions = Application.transactionService.findAll();
-            System.out.println(transactions);
+            System.out.println("doGet");
             response.getWriter().print(Application.objectMapper.writeValueAsString(transactions));
+            System.out.println(Application.objectMapper.writeValueAsString(transactions));
         }
     }
 
