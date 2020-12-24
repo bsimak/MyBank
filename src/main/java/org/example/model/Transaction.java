@@ -2,22 +2,25 @@ package org.example.model;
 
 //  import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
+import java.time.Clock;
+import java.time.ZonedDateTime;
 
 public class Transaction {
-
     private String id;
-
     private String reference;
-    private String timestamp;
+    private ZonedDateTime timestamp;
     private Integer amount;
 
     public Transaction(){
     }
     public Transaction(Integer amount,String reference){
+
+
         this.id = UUID.randomUUID().toString();
-        this.timestamp = "2020-12-19";
+        this.timestamp = ZonedDateTime.now(Clock.systemUTC());
         this.reference = reference;
         this.amount = amount;
+        System.out.println("now: "+this.timestamp);
     }
     // Transaction Id
     public String getId() {
@@ -27,10 +30,10 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
